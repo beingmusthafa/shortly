@@ -2,8 +2,7 @@ import { motion } from "framer-motion";
 import React, { useRef, useState } from "react";
 import Loading from "./Loading";
 import { useForm } from "react-hook-form";
-import axios from "../config/axios.config";
-import ServerResponse from "../types/serverResponse.type.ts";
+import axiosInstance from "../config/axios.config";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signIn } from "../state/slices/user.slice.ts";
@@ -61,7 +60,7 @@ const SignUp: React.FC<Props> = ({ setShow }) => {
     });
     try {
       const res = (
-        await axios.post("/auth/start-sign-up", {
+        await axiosInstance.post("/auth/start-sign-up", {
           email: formValues.email,
         })
       ).data;
@@ -100,7 +99,7 @@ const SignUp: React.FC<Props> = ({ setShow }) => {
         return;
       }
       const res = (
-        await axios.post("/auth/finish-sign-up", {
+        await axiosInstance.post("/auth/finish-sign-up", {
           ...data,
           code,
         })
@@ -128,7 +127,7 @@ const SignUp: React.FC<Props> = ({ setShow }) => {
       {showOtpForm ? (
         <form
           action=""
-          className=" w-fit border-2 border-sky-500 flex flex-col p-8 bg-sky-100 rounded-3xl overflow-x-auto _no-scrollbar relative h-fit md:max-h-80"
+          className=" w-fit border-2 border-sky-500 flex flex-col p-8 bg-sky-100 rounded-3xl  relative h-fit"
           onSubmit={finishSignUp}
         >
           <h1 className="_font-tilt-warp text-2xl mx-auto text-sky-500 mb-6">
@@ -155,7 +154,7 @@ const SignUp: React.FC<Props> = ({ setShow }) => {
           initial={{ x: -200, opacity: 0.2 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className=" w-fit border-2 border-sky-500 flex flex-col p-8 bg-sky-100 rounded-3xl overflow-x-auto _no-scrollbar relative h-fit md:max-h-80"
+          className=" w-fit border-2 border-sky-500 flex flex-col p-8 bg-sky-100 rounded-3xl h-fit relative"
           onSubmit={handleSubmit((data) => startSignUp(data as FormValues))}
         >
           <button
@@ -170,7 +169,13 @@ const SignUp: React.FC<Props> = ({ setShow }) => {
             {(errors.displayName?.message as string) || formError.displayName}
           </p>
           <input
-            {...register("displayName", { required: "Enter your name" })}
+            {...register("displayName", {
+              required: "Enter your name",
+              pattern: {
+                value: /^[a-zA-Z]{3,}[a-zA-Z\s]*[a-zA-Z]$/,
+                message: "Invalid name",
+              },
+            })}
             type="text"
             placeholder="Display name"
             name="displayName"
@@ -181,7 +186,13 @@ const SignUp: React.FC<Props> = ({ setShow }) => {
             {(errors.email?.message as string) || formError.email}
           </p>
           <input
-            {...register("email", { required: "Enter email" })}
+            {...register("email", {
+              required: "Enter email",
+              pattern: {
+                value: /^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$/,
+                message: "Enter a valid email",
+              },
+            })}
             type="text"
             placeholder="Email"
             name="email"

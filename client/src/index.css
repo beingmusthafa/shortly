@@ -1,3 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&family=Pacifico&family=Tilt+Warp&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+input {
+  padding: 0.5rem;
+  transition: 0.3s;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+  font-size: 1rem;
+  font-weight: bold;
+}
+._font-tilt-warp {
+  font-family: "Tilt Warp", sans-serif;
+}
+._font-pacifico {
+  font-family: "Pacifico", cursive;
+}
+.font-dm {
+  font-family: "DM Sans", sans-serif;
+}
+.font-dm-display {
+  font-family: "DM Serif Display", serif;
+}
+._trans-0-3 {
+  transition: 0.5s;
+}
+._screen-center {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+}
+._no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+._link-text {
+  max-width: 30rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 600px) {
+  ._link-text {
+    max-width: 16rem;
+  }
+}

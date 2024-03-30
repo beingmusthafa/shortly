@@ -64,7 +64,6 @@ const SignUp: React.FC<Props> = ({ setShow }) => {
           email: formValues.email,
         })
       ).data;
-      console.log("res:::", res);
       if (!res.success) {
         if (res.data.formError) {
           setFormError(res.data.formError);
@@ -72,7 +71,6 @@ const SignUp: React.FC<Props> = ({ setShow }) => {
         }
         throw new Error(res.message);
       }
-      console.log("requeset setn");
       setData({
         name: formValues.displayName,
         email: formValues.email,

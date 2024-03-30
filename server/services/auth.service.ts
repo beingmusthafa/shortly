@@ -30,7 +30,10 @@ export class AuthService {
   async signIn(
     email: string,
     password: string
-  ): ServiceResponse<{ user: object; token: string }> {
+  ): ServiceResponse<
+    | { user: object; token: string }
+    | { formError: { email?: string; password?: string } }
+  > {
     try {
       const user = await this.usersRepository.findOne({ email });
       if (!user) {
@@ -38,6 +41,9 @@ export class AuthService {
           success: false,
           message: "User not found",
           statusCode: 404,
+          data: {
+            formError: { email: "User not found" },
+          },
         };
       }
       if (!this.comparePassword(password, user.password)) {
@@ -45,9 +51,12 @@ export class AuthService {
           success: false,
           message: "Invalid password",
           statusCode: 401,
+          data: {
+            formError: { password: "Invalid password" },
+          },
         };
       }
-      const { password: _, ...rest } = user;
+      const { password: _, ...rest } = user.toObject();
       return {
         success: true,
         message: "User signed in",
@@ -115,7 +124,7 @@ export class AuthService {
         email: data.email,
         password: hashedPassword,
       });
-      const { password: _, ...rest } = user;
+      const { password: _, ...rest } = user.toObject();
       return {
         success: true,
         message: "User created",

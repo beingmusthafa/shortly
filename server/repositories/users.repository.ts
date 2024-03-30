@@ -1,22 +1,43 @@
+import { QueryOptions } from "mongoose";
 import usersModel from "../models/users.model.js";
 
 class UsersRepository {
   private model = usersModel;
 
   async create(data: { name: string; email: string; password: string }) {
-    return await this.model.create(data);
+    try {
+      return await this.model.create(data);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
-  async findOne(query: object) {
-    return await this.model.findOne(query);
+  async findOne(query: object, select?: object) {
+    try {
+      return await this.model.findOne(query, select);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   async find(query: object) {
-    return await this.model.find(query);
+    try {
+      return await this.model.find(query);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   async deleteOne(query: object) {
-    return await this.model.deleteOne(query);
+    try {
+      return await this.model.deleteOne(query);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 }
 

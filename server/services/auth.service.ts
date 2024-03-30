@@ -63,7 +63,9 @@ export class AuthService {
     }
   }
 
-  async startSignUp(email: string): ServiceResponse {
+  async startSignUp(
+    email: string
+  ): ServiceResponse<{ formError?: { email: string } }> {
     try {
       const user = await this.usersRepository.findOne({ email });
       if (user) {
@@ -71,11 +73,13 @@ export class AuthService {
           success: false,
           message: "Email already exists",
           statusCode: 400,
+          data: { formError: { email: "Email already exists" } },
         };
       }
       const code = Math.floor(100000 + Math.random() * 900000);
       await this.otpsRepository.deleteOne(email);
       await mailer.sendVerificationMail(email, code);
+      await this.otpsRepository.create({ email, code });
       return {
         success: true,
         message: "Verification code sent",

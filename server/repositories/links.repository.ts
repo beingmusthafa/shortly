@@ -9,19 +9,48 @@ class LinksRepository {
     shortLink: string;
     user: DatabaseId | string;
   }) {
-    return await this.model.create(data);
+    try {
+      return await this.model.create(data);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   async findOne(query: object) {
-    return await this.model.findOne(query);
+    try {
+      return await this.model.findOne(query);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   async find(query: object) {
-    return await this.model.find(query);
+    try {
+      return await this.model.find(query);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   async deleteOne(query: object) {
-    return await this.model.deleteOne(query);
+    try {
+      return await this.model.deleteOne(query);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  async exists(query: object) {
+    try {
+      return await this.model.exists(query);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 }
 

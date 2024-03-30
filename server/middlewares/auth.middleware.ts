@@ -7,8 +7,9 @@ import UsersRepository from "../repositories/users.repository.js";
 declare global {
   namespace Express {
     interface Request {
-      session: any;
-      user?: { _id: string | DatabaseId; name: string; email: string };
+      session: {
+        user?: { _id: string | DatabaseId; name: string; email: string };
+      };
     }
   }
 }
@@ -41,3 +42,4 @@ class AuthMiddleware {
     }
   }
 }
+export default new AuthMiddleware(new UsersRepository());

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Link from "../types/link";
+import Link from "../types/link.type";
 type Props = {
   link: Link;
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TCurrentUser from "../types/currentUser.type";
@@ -23,7 +23,7 @@ const Header = () => {
       {currentUser && (
         <div
           onClick={() => setShowOptions((prev) => !prev)}
-          className="w-10 h-10 bg-slate-500 rounded-full relative flex items-center justify-center"
+          className="w-10 h-10 bg-slate-500 rounded-full relative flex items-center justify-center cursor-pointer"
         >
           <p className="text-lg font-bold text-white">
             {currentUser.name.slice(0, 1).toUpperCase()}

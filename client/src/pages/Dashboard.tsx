@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "../types/link.type";
 import LinkCard from "../components/LinkCard";
 import AddLink from "../components/AddLink";

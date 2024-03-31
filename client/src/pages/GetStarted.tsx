@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const GetStarted = () => {

@@ -23,7 +23,7 @@ const Header = () => {
       {currentUser && (
         <div
           onClick={() => setShowOptions((prev) => !prev)}
-          className="w-10 h-10 bg-slate-500 rounded-full relative flex items-center justify-center cursor-pointer"
+          className="w-10 h-10 bg-sky-500 rounded-full relative flex items-center justify-center cursor-pointer"
         >
           <p className="text-lg font-bold text-white">
             {currentUser.name.slice(0, 1).toUpperCase()}

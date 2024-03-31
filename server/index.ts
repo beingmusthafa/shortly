@@ -19,11 +19,13 @@ const app = express();
 connectToDb();
 dotenv.config();
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_BASE_URL,
-  })
-);
+if (process.env.NODE_ENV === "development") {
+  app.use(
+    cors({
+      origin: process.env.CLIENT_BASE_URL,
+    })
+  );
+}
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -37,6 +39,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("../public"));
 app.use("/api/auth", authRouter);
 app.use("/api/", userRouter);
+
+app.options("*", (req: Request, res: Response) => {
+  res.end();
+});
 
 app.get(
   "/:shortLink",
@@ -64,8 +70,4 @@ app.use("*", (req: Request, res: Response) => {
 
 app.listen(3000, () => {
   console.log("Server started");
-});
-
-app.get("/", (req: Request, res: Response, next: NextFunction) => {
-  res.send("hello world");
 });

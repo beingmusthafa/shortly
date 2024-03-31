@@ -17,4 +17,11 @@ router.get(
 router.post("/create-link", (req: Request, res: Response, next: NextFunction) =>
   userController.createLink(req, res, next)
 );
+
+router.delete(
+  "/delete-link/:linkId",
+  (req: Request, res: Response, next: NextFunction) =>
+    userController.deleteLink(req, res, next)
+);
+
 export default router;

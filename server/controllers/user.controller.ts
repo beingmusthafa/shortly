@@ -30,6 +30,19 @@ class UserController {
       next(customError(error.message, 500));
     }
   }
+
+  async deleteLink(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { linkId } = req.params;
+      const response = await this.linksService.deleteLink(
+        linkId,
+        req.session.user._id
+      );
+      res.status(response.statusCode).json(response);
+    } catch (error) {
+      next(customError(error.message, 500));
+    }
+  }
 }
 
 export default new UserController(linksService);

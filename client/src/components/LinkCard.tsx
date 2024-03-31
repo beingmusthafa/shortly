@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Link from "../types/link.type";
 type Props = {
   link: Link;
+  onDelete: () => void;
 };
-const LinkCard: React.FC<Props> = ({ link }) => {
+const LinkCard: React.FC<Props> = ({ link, onDelete }) => {
   const [orgCopied, setOrgCopied] = useState(false);
   const [shortCopied, setShortCopied] = useState(false);
   const handleCopy = (text: string, type: "org" | "short") => {
@@ -16,35 +17,41 @@ const LinkCard: React.FC<Props> = ({ link }) => {
     }, 3000);
   };
   return (
-    <div className="flex flex-col items-start gap-6 shadow-md border p-4">
-      <div className="flex gap-4">
-        <p className="text-xl font-bold _link-text">
-          {import.meta.env.VITE_SERVER_BASE_URL + "/" + link.shortLink}
-        </p>
-        <button
-          onClick={() =>
-            handleCopy(
-              import.meta.env.VITE_SERVER_BASE_URL + "/" + link.shortLink,
-              "short"
-            )
-          }
-          className={`bx ${
-            shortCopied ? "bx-check" : "bx-copy"
-          } text-xl text-sky-600`}
-        ></button>
+    <div className="flex w-fit items-start">
+      <div className="flex flex-col items-start shadow-md border p-4">
+        <div className="flex gap-4 mb-6">
+          <p className="text-xl font-bold _link-text">
+            {import.meta.env.VITE_SERVER_BASE_URL + "/" + link.shortLink}
+          </p>
+          <button
+            onClick={() =>
+              handleCopy(
+                import.meta.env.VITE_SERVER_BASE_URL + "/" + link.shortLink,
+                "short"
+              )
+            }
+            className={`bx ${
+              shortCopied ? "bx-check" : "bx-copy"
+            } text-xl text-sky-600`}
+          ></button>
+        </div>
+        <div className="flex gap-4 items-center justify-start">
+          <p className="text-slate-600 _link-text">
+            <span className="text-black font-semibold">Original: </span>
+            {link.originalLink}
+          </p>
+          <button
+            onClick={() => handleCopy(link.originalLink, "org")}
+            className={`bx ${
+              orgCopied ? "bx-check" : "bx-copy"
+            } text-xl text-slate-500`}
+          ></button>
+        </div>
       </div>
-      <div className="flex gap-4 items-center justify-start">
-        <p className="text-slate-600 _link-text">
-          <span className="text-black font-semibold">Original: </span>
-          {link.originalLink}
-        </p>
-        <button
-          onClick={() => handleCopy(link.originalLink, "org")}
-          className={`bx ${
-            orgCopied ? "bx-check" : "bx-copy"
-          } text-xl text-slate-500`}
-        ></button>
-      </div>
+      <button
+        onClick={onDelete}
+        className="bx bx-trash-alt text-xl bg-red-500 p-2 text-white ml-auto"
+      ></button>
     </div>
   );
 };

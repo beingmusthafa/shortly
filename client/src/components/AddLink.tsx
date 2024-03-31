@@ -48,7 +48,7 @@ const AddLink: React.FC<Props> = ({ setShow, fetchData }) => {
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.3 }}
         action=""
-        className="w-fit border-2 border-sky-500 flex flex-col p-8 gap-6 bg-sky-100 rounded-3xl h-fit relative"
+        className="w-fit border-2 border-sky-500 flex flex-col p-8 gap-6 bg-sky-100 rounded-3xl h-fit relative mt-[20vh]"
         onSubmit={handleSubmit}
       >
         <button

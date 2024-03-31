@@ -53,6 +53,19 @@ export class LinksService {
       throw error;
     }
   }
+
+  async deleteLink(
+    linkId: string | DatabaseId,
+    userId: string | DatabaseId
+  ): ServiceResponse {
+    try {
+      await this.linksRepository.deleteOne({ _id: linkId, user: userId });
+      return { success: true, message: "Link deleted", statusCode: 200 };
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 }
 
 export default new LinksService(new LinksRepository());

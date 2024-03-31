@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import Header from "./components/Header";
 import CheckAuth from "./components/CheckAuth";
+import Loading from "./components/Loading";
 const GetStarted = lazy(() => import("./pages/GetStarted"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -23,7 +24,7 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              <Suspense fallback={null}>
+              <Suspense fallback={<Loading />}>
                 <Dashboard />
               </Suspense>
             }
@@ -32,7 +33,7 @@ function App() {
         <Route
           path="*"
           element={
-            <Suspense>
+            <Suspense fallback={<Loading />}>
               <NotFound />
             </Suspense>
           }

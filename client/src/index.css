@@ -41,7 +41,6 @@ textarea:focus {
 }
 ._link-text {
   max-width: 30rem;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }

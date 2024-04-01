@@ -18,7 +18,7 @@ const LinkCard: React.FC<Props> = ({ link, onDelete }) => {
     }, 3000);
   };
   return (
-    <div className="flex w-fit items-start">
+    <div className="flex flex-col md:flex-row w-fit items-start">
       <div className="flex flex-col items-start shadow-md border p-4">
         <div className="flex gap-4 mb-6">
           <p className="text-xl font-bold _link-text whitespace-nowrap text-ellipsis">

@@ -39,6 +39,22 @@ class UsersRepository {
       throw error;
     }
   }
+
+  async updateOne(query: object, update: object) {
+    try {
+      const doc = await this.model.findOneAndUpdate(
+        query,
+        { $set: update },
+        {
+          new: true,
+        }
+      );
+      if (doc) return doc.toObject();
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 }
 
 export default UsersRepository;

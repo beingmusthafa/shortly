@@ -24,4 +24,10 @@ router.delete(
     userController.deleteLink(req, res, next)
 );
 
+router.patch(
+  "/update-name",
+  (req: Request, res: Response, next: NextFunction) =>
+    userController.updateName(req, res, next)
+);
+
 export default router;

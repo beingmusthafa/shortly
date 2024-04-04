@@ -1,14 +1,15 @@
 name: Deploy backend
 
 on:
- push:
+  push:
     branches:
       - master
-
+    paths:
+      - "server/**"
 jobs:
- deploy:
+  deploy:
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: production
     steps:
       - name: Checkout code
@@ -26,4 +27,3 @@ jobs:
             git pull
             npm run build
             pm2 start ./build/index.js
-            # Additional deployment commands here
